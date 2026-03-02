@@ -28,6 +28,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ github.sha }}
 
+      - name: Print Image Info
+        run: |
+          echo "✅ Image pushed successfully!"
+          echo "📦 Registry : docker.io"
+          echo "🏷️  Image    : ${{ secrets.DOCKERHUB_USERNAME }}/backstage"
+          echo "🔖 Tag      : python-app-${{ github.sha }}"
+          echo "🔗 Full URL : docker.io/${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ github.sha }}"
 
 
 
