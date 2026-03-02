@@ -14,8 +14,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: actions-runner
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: false
     syncOptions:
       - CreateNamespace=true
