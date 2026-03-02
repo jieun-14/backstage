@@ -17,7 +17,7 @@ def details2():
         'hostname': socket.gethostname(),
         'ip': request.remote_addr,
         'message2': '이지은짱!!',
-
+        'message3': '추카추카추!!!',
         'message4': 'self hosted runner!!!'
     })
 
