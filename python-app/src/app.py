@@ -16,7 +16,8 @@ def details2():
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         'hostname': socket.gethostname(),
         'ip': request.remote_addr,
-        'message2': '이지은짱!!'
+        'message2': '이지은짱!!',
+        'message3': '추카추카추!!!'
     })
 
 
