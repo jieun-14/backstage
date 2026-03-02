@@ -22,8 +22,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./python-app
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ github.sha }}
+
+
+
+
