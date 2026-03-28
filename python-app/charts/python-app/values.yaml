@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: banzzakks/backstage
   pullPolicy: IfNotPresent
-  tag: "python-app-54a15bb"    # Actions 실행되면 Job Output으로 업데이트 됨
+  tag: "python-app-737d50f"    # Actions 실행되면 Job Output으로 업데이트 됨
                             
 imagePullSecrets: []
 nameOverride: ""
