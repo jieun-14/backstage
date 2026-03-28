@@ -68,6 +68,7 @@ jobs:
       - name: Update Image Tag in values.yaml         # values.yaml의 tag를 현재 SHA로 교체
         run: |
           sed -i "s|tag: \"python-app-.*\"|tag: \"python-app-${{ env.COMMIT_ID }}\"|" python-app/charts/python-app/values.yaml
+          # sed 와 yq 의 차이점?
           echo "✅ Updated image tag to: python-app-${{ env.COMMIT_ID }}"
 
       - name: Commit and Push values.yaml             # values.yaml을 git에 반영

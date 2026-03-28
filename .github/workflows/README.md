@@ -46,3 +46,13 @@ python-app-a8d7fd0ad1f666312da4ea39ee0de763dd1b8feb
 python-app-v0.2
 
 ```
+
+--- 
+
+## yq 설치
+
+
+---
+
+## github push in github actions
+
