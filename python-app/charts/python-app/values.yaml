@@ -3,8 +3,7 @@ replicaCount: 1
 image:
   repository: banzzakks/backstage
   pullPolicy: IfNotPresent
-  tag: "python-app-7578bdaeabe2e464baabac3375877b320602b919"    # 최근 push된 이미지로 변경 필요
-                            # Job Output github actions
+  tag: "python-app-7578bdaeabe2e464baabac3375877b320602b919"    # Actions 실행되면 Job Output으로 업데이트 됨
                             
 imagePullSecrets: []
 nameOverride: ""
