@@ -7,7 +7,7 @@ Udemy 강의 **"From DevOps to Platform Engineering: Master Backstage & IDPs"** 
 ```
 Docker 이미지 빌드/push
         ↓
-kind 클러스터 생성 (control-plane 1 + worker 1)
+kind 클러스터 생성
         ↓
 ingress-nginx 설치
         ↓
