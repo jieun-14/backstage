@@ -2,6 +2,20 @@
 
 Udemy 강의 **"From DevOps to Platform Engineering: Master Backstage & IDPs"** 실습 환경 셋업 가이드입니다.
 
+Docker, Kubernetes 및 ArgoCD를 사용하여 애플리케이션을 구축하고 배포합니다.
+
+GitHub Actions를 사용하여 CI/CD 파이프라인 자동화하기
+
+Backstage를 사용하여 내부 개발자 플랫폼(IDP) 구축하기
+
+Backstage TechDocs를 사용하여 코드로 문서 작성하기
+
+애플리케이션 배포 속도 향상을 위한 소프트웨어 템플릿 구현
+
+프로덕션 환경에서 Backstage 배포하기
+
+---
+
 ## 환경 구성 개요
 
 ```
@@ -146,6 +160,14 @@ sudo vi /etc/hosts
 
 host 등록 안하고 ingress 주소로 접속 가능 
 https://argocd.test.com/
+
+---
+
+## self-hosted runner 실행
+
+```
+kubectl apply -f ~/git/backstage/projects/actions-runner/runner-deployment.yaml -n actions-runner-system
+```
 
 ---
 
