@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: banzzakks/backstage
   pullPolicy: IfNotPresent
-  tag: "python-app-v0.2"
+  tag: "python-app-7578bdaeabe2e464baabac3375877b320602b919"
 
 imagePullSecrets: []
 nameOverride: ""
