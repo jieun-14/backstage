@@ -144,6 +144,9 @@ sudo vi /etc/hosts
 - python-app: `http://python-app.local`
 - ArgoCD: `http://argocd.local`
 
+host 등록 안하고 ingress 주소로 접속 가능 
+https://argocd.test.com/
+
 ---
 
 ## 클러스터 삭제
