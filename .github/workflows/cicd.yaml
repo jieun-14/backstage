@@ -53,7 +53,7 @@ jobs:
 
       - name: ArgoCD Login
         run: |
-          argocd login https://argocd-server.argocd \
+          argocd login argocd-server.argocd \
             --username admin \
             --password SpXaqw0ZemPXH1wf \
             --insecure
