@@ -25,7 +25,7 @@ def details2():
 @app.route('/api/v1/healthz')
 def healthz():
     return jsonify({
-        'status': 'UPUPupupㅁㅁㅁ'
+        'status': 'UPUPupupㅁㅁaaㅁ'
     }), 200
 
 if __name__ == '__main__':
