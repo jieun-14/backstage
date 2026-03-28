@@ -44,6 +44,24 @@ jobs:
     needs: ci   # ci 가 성공해야 cd 실행
 
     steps:
+      - name: Checkout                                # values.yaml 파일 수정을 위해 필요
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Image Tag in values.yaml         # values.yaml의 tag를 현재 SHA로 교체
+        run: |
+          sed -i 's|tag: "python-app-.*"|tag: "python-app-${{ github.sha }}"|' python-app/charts/python-app/values.yaml
+          echo "✅ Updated image tag to: python-app-${{ github.sha }}"
+
+      - name: Commit and Push values.yaml             # values.yaml을 git에 반영
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add python-app/charts/python-app/values.yaml
+          git commit -m "chore: update python-app image tag to python-app-${{ github.sha }}"
+          git push
+
       - name: Install ArgoCD CLI
         run: |
           curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-arm64
