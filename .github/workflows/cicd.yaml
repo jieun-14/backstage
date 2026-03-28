@@ -44,6 +44,11 @@ jobs:
     needs: ci   # ci 가 성공해야 cd 실행
 
     steps:
+      - name: Install ArgoCD CLI
+        run: |
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64
+          chmod +x /usr/local/bin/argocd
+
       - name: ArgoCD Login
         run: |
           argocd login https://argocd-server.argocd \
