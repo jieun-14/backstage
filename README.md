@@ -156,3 +156,8 @@ https://argocd.test.com/
 ```bash
 kind delete cluster
 ```
+
+
+---
+
+## docker 종료했다가 다시 실행하면 kubernetes 자동으로 올라옴
