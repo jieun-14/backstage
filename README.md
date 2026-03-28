@@ -70,9 +70,8 @@ kind create cluster --config=cluster
 ```bash
 kubectl cluster-info
 kubectl get nodes
-# NAME                      STATUS   ROLES
-# backstage-control-plane   Ready    control-plane
-# backstage-worker          Ready    <none>
+# NAME                 STATUS   ROLES           AGE   VERSION
+# kind-control-plane   Ready    control-plane   26d   v1.35.0
 ```
 
 ---
