@@ -42,6 +42,8 @@ jobs:
   cd:
     runs-on: self-hosted
     needs: ci   # ci 가 성공해야 cd 실행
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout                                # values.yaml 파일 수정을 위해 필요
