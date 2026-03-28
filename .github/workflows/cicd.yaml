@@ -9,11 +9,23 @@ on:
 
 jobs:
   ci:
+    outputs:
+      commit_id: ${{ steps.set-sha.outputs.short_sha }}
+      # 같은 Job 내부의 스텝끼리는 $GITHUB_ENV 를 사용해도 되지만
+      # GitHub Actions 구조상, Job 레벨의 outputs는 개별 Step들의 output(steps.<step_id>.outputs.*)에서만 값을 가져올 수 있도록 설계되어
+      # 컨테이너 밖(Job 레벨)으로 값을 내보낼 때는 반드시 스텝의 output을 거쳐야 한다
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set short SHA
+        id: set-sha
+        run: |
+          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "COMMIT_ID=$SHORT_SHA" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -29,21 +41,23 @@ jobs:
         with:
           context: ./python-app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ env.COMMIT_ID }}
 
       - name: Print Image Info
         run: |
           echo "✅ Image pushed successfully!"
           echo "📦 Registry : docker.io"
           echo "🏷️  Image    : ${{ secrets.DOCKERHUB_USERNAME }}/backstage"
-          echo "🔖 Tag      : python-app-${{ github.sha }}"
-          echo "🔗 Full URL : docker.io/${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ github.sha }}"
+          echo "🔖 Tag      : python-app-${{ env.COMMIT_ID }}"
+          echo "🔗 Full URL : docker.io/${{ secrets.DOCKERHUB_USERNAME }}/backstage:python-app-${{ env.COMMIT_ID }}"
 
   cd:
     runs-on: self-hosted
     needs: ci   # ci 가 성공해야 cd 실행
     permissions:
       contents: write
+    env:
+      COMMIT_ID: ${{ needs.ci.outputs.commit_id }}
 
     steps:
       - name: Checkout                                # values.yaml 파일 수정을 위해 필요
@@ -53,15 +67,15 @@ jobs:
 
       - name: Update Image Tag in values.yaml         # values.yaml의 tag를 현재 SHA로 교체
         run: |
-          sed -i 's|tag: "python-app-.*"|tag: "python-app-${{ github.sha }}"|' python-app/charts/python-app/values.yaml
-          echo "✅ Updated image tag to: python-app-${{ github.sha }}"
+          sed -i "s|tag: \"python-app-.*\"|tag: \"python-app-${{ env.COMMIT_ID }}\"|" python-app/charts/python-app/values.yaml
+          echo "✅ Updated image tag to: python-app-${{ env.COMMIT_ID }}"
 
       - name: Commit and Push values.yaml             # values.yaml을 git에 반영
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add python-app/charts/python-app/values.yaml
-          git commit -m "chore: update python-app image tag to python-app-${{ github.sha }}"
+          git commit -m "chore: update python-app image tag to python-app-${{ env.COMMIT_ID }}"
           git push
 
       - name: Install ArgoCD CLI
