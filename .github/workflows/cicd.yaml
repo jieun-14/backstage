@@ -46,8 +46,10 @@ jobs:
     steps:
       - name: Install ArgoCD CLI
         run: |
-          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64
-          chmod +x /usr/local/bin/argocd
+          curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-arm64
+          chmod +x argocd
+          sudo mv argocd /usr/local/bin/argocd
+          # 클러스터 내부 argocd에서 다운
 
       - name: ArgoCD Login
         run: |
